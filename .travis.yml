@@ -1,0 +1,10 @@
+services:
+  - docker
+
+branches:
+   only:
+      - master
+
+script:
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+   - docker build -t sirmmo/nginx-optimized:latest -t sirmmo/nginx-optimized:1.0.$TRAVIS_BUILD_NUMBER . && docker push sirmmo/nginx-optimized:latest
